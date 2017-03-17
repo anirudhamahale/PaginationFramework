@@ -12,6 +12,7 @@
 		BCD79CE41E7A714000F50DC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCD79CE21E7A714000F50DC4 /* Main.storyboard */; };
 		BCD79CE61E7A714000F50DC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCD79CE51E7A714000F50DC4 /* Assets.xcassets */; };
 		BCD79CE91E7A714000F50DC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCD79CE71E7A714000F50DC4 /* LaunchScreen.storyboard */; };
+		BCD79CF11E7A723700F50DC4 /* PaginationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD79CF01E7A723700F50DC4 /* PaginationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		BCD79CE51E7A714000F50DC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCD79CE81E7A714000F50DC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCD79CEA1E7A714000F50DC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCD79CF01E7A723700F50DC4 /* PaginationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				BCD79CDE1E7A714000F50DC4 /* AppDelegate.swift */,
 				BCD79CE01E7A714000F50DC4 /* ViewController.swift */,
+				BCD79CF01E7A723700F50DC4 /* PaginationCell.swift */,
 				BCD79CE21E7A714000F50DC4 /* Main.storyboard */,
 				BCD79CE51E7A714000F50DC4 /* Assets.xcassets */,
 				BCD79CE71E7A714000F50DC4 /* LaunchScreen.storyboard */,
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCD79CE11E7A714000F50DC4 /* ViewController.swift in Sources */,
+				BCD79CF11E7A723700F50DC4 /* PaginationCell.swift in Sources */,
 				BCD79CDF1E7A714000F50DC4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
