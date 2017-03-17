@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		58BB69CC34A272670660C7FA /* Pods_Pagination_framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEA9A48EC7E2D002C00D68D /* Pods_Pagination_framework.framework */; };
+		BC25214F1E7BCA81001C2A37 /* PaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC25214E1E7BCA81001C2A37 /* PaginationView.swift */; };
 		BCE16B971E7BC3B700A866E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE16B961E7BC3B700A866E8 /* AppDelegate.swift */; };
 		BCE16B991E7BC3B700A866E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE16B981E7BC3B700A866E8 /* ViewController.swift */; };
 		BCE16B9C1E7BC3B700A866E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCE16B9A1E7BC3B700A866E8 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		630F7160838804077760AE58 /* Pods-Pagination_framework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pagination_framework.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pagination_framework/Pods-Pagination_framework.release.xcconfig"; sourceTree = "<group>"; };
 		8F451F0EF3FD0439D426C7C7 /* Pods-Pagination_framework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pagination_framework.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pagination_framework/Pods-Pagination_framework.debug.xcconfig"; sourceTree = "<group>"; };
+		BC25214E1E7BCA81001C2A37 /* PaginationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationView.swift; sourceTree = "<group>"; };
 		BCE16B931E7BC3B700A866E8 /* Pagination_framework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pagination_framework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE16B961E7BC3B700A866E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCE16B981E7BC3B700A866E8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			children = (
 				BCE16B961E7BC3B700A866E8 /* AppDelegate.swift */,
 				BCE16B981E7BC3B700A866E8 /* ViewController.swift */,
+				BC25214E1E7BCA81001C2A37 /* PaginationView.swift */,
 				BCE16B9A1E7BC3B700A866E8 /* Main.storyboard */,
 				BCE16B9D1E7BC3B700A866E8 /* Assets.xcassets */,
 				BCE16B9F1E7BC3B700A866E8 /* LaunchScreen.storyboard */,
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC25214F1E7BCA81001C2A37 /* PaginationView.swift in Sources */,
 				BCE16B991E7BC3B700A866E8 /* ViewController.swift in Sources */,
 				BCE16B971E7BC3B700A866E8 /* AppDelegate.swift in Sources */,
 			);
@@ -374,6 +378,7 @@
 				BCE16BA71E7BC3B700A866E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
