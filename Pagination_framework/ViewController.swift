@@ -10,9 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var paginationView: PaginationView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        paginationView.activityIndicator.startAnimating()
     }
 
     override func didReceiveMemoryWarning() {
