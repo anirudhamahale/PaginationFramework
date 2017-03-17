@@ -47,6 +47,7 @@
                     <navigationItem key="navigationItem" title="Pagination" id="ZN0-qS-E8l"/>
                     <connections>
                         <outlet property="paginationView" destination="tiX-1X-DhN" id="iSP-GX-4DO"/>
+                        <outlet property="tableView" destination="dDJ-DF-khq" id="hlo-uk-BlH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

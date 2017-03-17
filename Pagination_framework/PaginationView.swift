@@ -25,7 +25,9 @@ class PaginationView: UIView {
         }
     }
     
-    var scrollView: UIScrollView!
+    var delegate: PaginationDelegate?
+    
+    public var scrollView: UIScrollView!
     
     public var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
@@ -38,7 +40,6 @@ class PaginationView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpActivityIndicator()
-        scrollView.delegate = self
     }
     
     func setUpActivityIndicator() {
@@ -52,6 +53,7 @@ class PaginationView: UIView {
 extension PaginationView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset
+        print(offset)
         let bounds = scrollView.bounds
         let size = scrollView.contentSize
         let inset = scrollView.contentInset
@@ -62,7 +64,7 @@ extension PaginationView: UIScrollViewDelegate {
         isPaginating = false
         if y > h + reload_distance {
             isPaginating = true
-            delay(time: 3, closure: { 
+            delay(time: 3, closure: {
                 self.isPaginating = false
             })
         }
