@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pagination.xcscheme</key>
+		<key>Pagination_framework.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>BCD79CDA1E7A714000F50DC4</key>
+		<key>BCE16B921E7BC3B700A866E8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
