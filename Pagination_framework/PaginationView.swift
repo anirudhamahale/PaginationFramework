@@ -15,19 +15,21 @@ protocol PaginationDelegate: class {
 
 class PaginationView: UIView {
     
-    var isPaginating = false {
+    public var isPaginating = false {
         didSet {
             if isPaginating {
                 activityIndicator.startAnimating()
+                self.delegate?.paginationDidStart(activityIndicator: activityIndicator)
             } else {
                 activityIndicator.stopAnimating()
+                self.delegate?.paginationDidFinish(activityIndicator: activityIndicator)
             }
         }
     }
     
-    var delegate: PaginationDelegate?
+    public var delegate: PaginationDelegate?
     
-    public var scrollView: UIScrollView!
+    public var scrollView: UIScrollView?
     
     public var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
@@ -40,6 +42,7 @@ class PaginationView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpActivityIndicator()
+        scrollView?.delegate = self
     }
     
     func setUpActivityIndicator() {

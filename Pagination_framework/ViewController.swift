@@ -17,11 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         paginationView.scrollView = tableView
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        paginationView.delegate = self
     }
 }
 
@@ -40,4 +36,24 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 }
+
+extension ViewController: PaginationDelegate {
+    func paginationDidStart(activityIndicator: UIActivityIndicatorView) {
+        print("Did Start")
+    }
+    
+    func paginationDidFinish(activityIndicator: UIActivityIndicatorView) {
+        print("Did Finish")
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
