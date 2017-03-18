@@ -42,7 +42,6 @@ class PaginationView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpActivityIndicator()
-        scrollView?.delegate = self
     }
     
     func setUpActivityIndicator() {
@@ -64,8 +63,7 @@ extension PaginationView: UIScrollViewDelegate {
         let h = size.height
         
         let reload_distance: CGFloat = -75 // It will call the API when there is 5 offers are remaining to be displayed. one offer height is 75.
-        isPaginating = false
-        if y > h + reload_distance {
+        if (y > h + reload_distance) && !isPaginating  {
             isPaginating = true
             delay(time: 3, closure: {
                 self.isPaginating = false
