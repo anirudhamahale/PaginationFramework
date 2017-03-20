@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     }
     
     func setUpPagination() {
+        paginationView.data.url = "http://www.omdbapi.com/?s=th&page=1"
         tableView.superview?.addSubview(paginationView)
 
         paginationView.heightAnchor.constraint(equalToConstant: 50).isActive = true

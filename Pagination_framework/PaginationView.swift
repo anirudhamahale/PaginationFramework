@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import AlamofireSwiftyJSON
 
 protocol PaginationDelegate: class {
     func paginationDidStart(activityIndicator: UIActivityIndicatorView)
@@ -35,6 +38,13 @@ class PaginationView: UIView {
     
     public var scrollView: UIScrollView?
     
+    public var data = (url: "",
+                       parameters: [String: Any](),
+                       offset: 0,
+                       limit: 20,
+                       method: HTTPMethod.get,
+                       headers: HTTPHeaders())
+    
     public var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
         view.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
@@ -59,44 +69,35 @@ class PaginationView: UIView {
         activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
+    
+    func callAPI() {
+        
+        
+    }
 }
 
-extension PaginationView: UIScrollViewDelegate {
-    /*
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset
-        let bounds = scrollView.bounds
-        let size = scrollView.contentSize
-        let inset = scrollView.contentInset
-        let y = offset.y + bounds.size.height - inset.bottom
-        let h = size.height
-        
-        let reload_distance: CGFloat = -75 // It will call the API when there is 5 offers are remaining to be displayed. one offer height is 75.
-        if (y > h + reload_distance) && !isPaginating  {
-            isPaginating = true
-            delay(time: 5, closure: {
-                self.isPaginating = false
-            })
-        }
-    }
-    
-    
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        if !isPaginating  {
-            isPaginating = true
-            delay(time: 5, closure: {
-                self.isPaginating = false
-            })
-        }
-    }
- */
-    
+extension PaginationView: UIScrollViewDelegate {    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if !isPaginating && targetContentOffset.pointee.y > 0.0 {
+            if data.url == "" || data.url == "\n" {
+                return
+            }
+            print(data.method)
             isPaginating = true
-            delay(time: 5, closure: {
+            Alamofire.request(data.url, method: data.method, parameters: data.parameters, encoding: URLEncoding.default).responseSwiftyJSON { response in
                 self.isPaginating = false
-            })
+                if response.error != nil {
+                    return
+                }
+                
+                if response.response?.statusCode == 200 {
+                    guard let json = response.result.value else {
+                        return
+                    }
+                    
+                    print(json)
+                }
+            }
         }
     }
 }
