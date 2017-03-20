@@ -86,7 +86,8 @@ extension PaginationView: UIScrollViewDelegate {
         print(targetContentOffset.pointee.y)
         print(scrollView.contentOffset.y)
         if !isPaginating && targetOffset < scrollView.contentOffset.y {
-            targetOffset = targetContentOffset.pointee.y
+            print(scrollView.contentOffset.y)
+            targetOffset = scrollView.contentOffset.y
             if data.url == "" || data.url == "\n" {
                 return
             }
@@ -101,7 +102,9 @@ extension PaginationView: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print(scrollView.contentOffset.y)
+        if targetOffset < scrollView.contentOffset.y {
+            print(scrollView.contentOffset.y)
+        }
     }
 }
 
