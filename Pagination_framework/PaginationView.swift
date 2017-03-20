@@ -36,15 +36,18 @@ class PaginationView: UIView {
     }
     
     public var delegate: PaginationDelegate?
-    
+    public var paginationBottomAnchor: NSLayoutConstraint!
     public var scrollView: UIScrollView?
-    
+    var targetOffset: CGFloat = 0.0
     public var data = (url: "",
                        parameters: [String: Any](),
                        offset: 0,
                        limit: 20,
                        method: HTTPMethod.get,
-                       headers: HTTPHeaders())
+                       headers: HTTPHeaders(),
+                       page_name: "page",
+                       offset_name: "offset",
+                       limit_name: "limit")
     
     public var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
@@ -78,13 +81,15 @@ class PaginationView: UIView {
 }
 
 extension PaginationView: UIScrollViewDelegate {
+    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         print(targetContentOffset.pointee.y)
-        if !isPaginating && targetContentOffset.pointee.y <= 0.0 {
+        print(scrollView.contentOffset.y)
+        if !isPaginating && targetOffset < scrollView.contentOffset.y {
+            targetOffset = targetContentOffset.pointee.y
             if data.url == "" || data.url == "\n" {
                 return
             }
-            print(data.method)
             isPaginating = true
             Alamofire.request(data.url, method: data.method, parameters: data.parameters, encoding: URLEncoding.default).responseSwiftyJSON { response in
                 delay(time: 2, closure: {
@@ -93,6 +98,10 @@ extension PaginationView: UIScrollViewDelegate {
                 })
             }
         }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        print(scrollView.contentOffset.y)
     }
 }
 
