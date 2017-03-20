@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     }
     
     func setUpPagination() {
-        paginationView.translatesAutoresizingMaskIntoConstraints = false
         tableView.superview?.addSubview(paginationView)
 
         paginationView.heightAnchor.constraint(equalToConstant: 50).isActive = true

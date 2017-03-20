@@ -21,10 +21,12 @@ class PaginationView: UIView {
                 activityIndicator.startAnimating()
                 self.alpha = 1.0
                 self.delegate?.paginationDidStart(activityIndicator: activityIndicator)
+                self.scrollView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
             } else {
                 activityIndicator.stopAnimating()
                 self.alpha = 0.0
                 self.delegate?.paginationDidFinish(activityIndicator: activityIndicator)
+                self.scrollView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             }
         }
     }
@@ -43,6 +45,7 @@ class PaginationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.translatesAutoresizingMaskIntoConstraints = false
         setUpActivityIndicator()
     }
     
@@ -59,9 +62,9 @@ class PaginationView: UIView {
 }
 
 extension PaginationView: UIScrollViewDelegate {
+    /*
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset
-        print(offset)
         let bounds = scrollView.bounds
         let size = scrollView.contentSize
         let inset = scrollView.contentInset
@@ -70,6 +73,26 @@ extension PaginationView: UIScrollViewDelegate {
         
         let reload_distance: CGFloat = -75 // It will call the API when there is 5 offers are remaining to be displayed. one offer height is 75.
         if (y > h + reload_distance) && !isPaginating  {
+            isPaginating = true
+            delay(time: 5, closure: {
+                self.isPaginating = false
+            })
+        }
+    }
+    
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        if !isPaginating  {
+            isPaginating = true
+            delay(time: 5, closure: {
+                self.isPaginating = false
+            })
+        }
+    }
+ */
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if !isPaginating && targetContentOffset.pointee.y > 0.0 {
             isPaginating = true
             delay(time: 5, closure: {
                 self.isPaginating = false
