@@ -20,16 +20,13 @@ class ViewController: UIViewController {
     }
     
     func setUpPagination() {
-        paginationView.backgroundColor = UIColor.blue
         paginationView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.addSubview(paginationView)
-        tableView.bringSubview(toFront: paginationView)
-        
+        tableView.superview?.addSubview(paginationView)
+
         paginationView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         paginationView.bottomAnchor.constraint(equalTo: tableView.bottomAnchor).isActive = true
         paginationView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor).isActive = true
         paginationView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor).isActive = true
-        
         paginationView.scrollView = tableView
         paginationView.scrollView?.delegate = paginationView
         paginationView.delegate = self

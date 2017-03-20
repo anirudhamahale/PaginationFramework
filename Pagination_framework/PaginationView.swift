@@ -41,9 +41,13 @@ class PaginationView: UIView {
        return view
     }()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setUpActivityIndicator()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setUpActivityIndicator() {
