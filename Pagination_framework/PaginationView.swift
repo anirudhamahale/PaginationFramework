@@ -19,9 +19,11 @@ class PaginationView: UIView {
         didSet {
             if isPaginating {
                 activityIndicator.startAnimating()
+                self.alpha = 1.0
                 self.delegate?.paginationDidStart(activityIndicator: activityIndicator)
             } else {
                 activityIndicator.stopAnimating()
+                self.alpha = 0.0
                 self.delegate?.paginationDidFinish(activityIndicator: activityIndicator)
             }
         }
@@ -65,7 +67,7 @@ extension PaginationView: UIScrollViewDelegate {
         let reload_distance: CGFloat = -75 // It will call the API when there is 5 offers are remaining to be displayed. one offer height is 75.
         if (y > h + reload_distance) && !isPaginating  {
             isPaginating = true
-            delay(time: 3, closure: {
+            delay(time: 5, closure: {
                 self.isPaginating = false
             })
         }

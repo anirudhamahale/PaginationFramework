@@ -10,12 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var paginationView: PaginationView!
+    let paginationView = PaginationView()
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        setUpPagination() 
+    }
+    
+    func setUpPagination() {
+        paginationView.backgroundColor = UIColor.blue
+        paginationView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.addSubview(paginationView)
+        tableView.bringSubview(toFront: paginationView)
+        
+        paginationView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        paginationView.bottomAnchor.constraint(equalTo: tableView.bottomAnchor).isActive = true
+        paginationView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor).isActive = true
+        paginationView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor).isActive = true
+        
         paginationView.scrollView = tableView
         paginationView.scrollView?.delegate = paginationView
         paginationView.delegate = self
