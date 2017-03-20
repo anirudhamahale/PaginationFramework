@@ -51,7 +51,7 @@ class PaginationView: UIView {
         view.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         view.hidesWhenStopped = true
         view.translatesAutoresizingMaskIntoConstraints = false
-       return view
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -77,17 +77,20 @@ class PaginationView: UIView {
     }
 }
 
-extension PaginationView: UIScrollViewDelegate {    
+extension PaginationView: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if !isPaginating && targetContentOffset.pointee.y > 0.0 {
+        print(targetContentOffset.pointee.y)
+        if !isPaginating && targetContentOffset.pointee.y <= 0.0 {
             if data.url == "" || data.url == "\n" {
                 return
             }
             print(data.method)
             isPaginating = true
             Alamofire.request(data.url, method: data.method, parameters: data.parameters, encoding: URLEncoding.default).responseSwiftyJSON { response in
-                self.isPaginating = false
-                self.delegate?.paginationDidFinish(with: response.result.value, error: response.error, statusCode: response.response?.statusCode)
+                delay(time: 2, closure: {
+                    self.isPaginating = false
+                    self.delegate?.paginationDidFinish(with: response.result.value, error: response.error, statusCode: response.response?.statusCode)
+                })
             }
         }
     }

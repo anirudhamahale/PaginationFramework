@@ -11,8 +11,20 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
 
+    struct Movie {
+        let name: String
+        let year: String
+        
+        init(name: String, year: String) {
+            self.name = name
+            self.year = year
+        }
+    }
+    
     let paginationView = PaginationView()
     @IBOutlet weak var tableView: UITableView!
+    
+    var movieData = [Movie]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +52,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return movieData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "\(indexPath.row)"
+        cell.textLabel?.text = movieData[indexPath.row].name
+        cell.detailTextLabel?.text = movieData[indexPath.row].year
         return cell
     }
 }
@@ -60,9 +73,26 @@ extension ViewController: PaginationDelegate {
     }
     
     func paginationDidFinish(with json: JSON?, error: Error?, statusCode: Int?) {
-        print(json)
-        print(error)
-        print(statusCode)
+        if error != nil {
+            return
+        }
+        
+        if statusCode == 200 {
+            guard let readableJson = json else {
+                return
+            }
+            
+            guard let search = readableJson["Search"].array else {
+                return
+            }
+            
+            for item in search {
+                let name = item["Title"].string ?? ""
+                let year = item["Year"].string ?? ""
+                movieData.append(Movie(name: name, year: year))
+            }
+            tableView.reloadData()
+        }
     }
 }
 
