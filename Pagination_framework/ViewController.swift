@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ViewController: UIViewController {
 
@@ -56,6 +57,12 @@ extension ViewController: PaginationDelegate {
     
     func paginationDidFinish(activityIndicator: UIActivityIndicatorView) {
         print("Did Finish")
+    }
+    
+    func paginationDidFinish(with json: JSON?, error: Error?, statusCode: Int?) {
+        print(json)
+        print(error)
+        print(statusCode)
     }
 }
 

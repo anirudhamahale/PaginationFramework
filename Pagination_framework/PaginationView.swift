@@ -14,6 +14,7 @@ import AlamofireSwiftyJSON
 protocol PaginationDelegate: class {
     func paginationDidStart(activityIndicator: UIActivityIndicatorView)
     func paginationDidFinish(activityIndicator: UIActivityIndicatorView)
+    func paginationDidFinish(with json: JSON?, error: Error?, statusCode: Int?)
 }
 
 class PaginationView: UIView {
@@ -86,17 +87,7 @@ extension PaginationView: UIScrollViewDelegate {
             isPaginating = true
             Alamofire.request(data.url, method: data.method, parameters: data.parameters, encoding: URLEncoding.default).responseSwiftyJSON { response in
                 self.isPaginating = false
-                if response.error != nil {
-                    return
-                }
-                
-                if response.response?.statusCode == 200 {
-                    guard let json = response.result.value else {
-                        return
-                    }
-                    
-                    print(json)
-                }
+                self.delegate?.paginationDidFinish(with: response.result.value, error: response.error, statusCode: response.response?.statusCode)
             }
         }
     }
