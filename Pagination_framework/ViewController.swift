@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         setUpPagination() 
     }
     
@@ -66,15 +67,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension ViewController: PaginationDelegate {
-    func paginationDidStart(activityIndicator: UIActivityIndicatorView) {
-        print("Did Start")
-    }
-    
-    func paginationDidFinish(activityIndicator: UIActivityIndicatorView) {
-        print("Did Finish")
-    }
-    
-    func paginationDidFinish(with json: JSON?, error: Error?, statusCode: Int?) {
+    func paginationDidFinish(with activityIndicator: UIActivityIndicatorView, json: JSON?, error: Error?, statusCode: Int?) {
         if error != nil {
             return
         }
@@ -97,14 +90,3 @@ extension ViewController: PaginationDelegate {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

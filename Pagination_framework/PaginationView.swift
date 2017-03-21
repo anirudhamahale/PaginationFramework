@@ -11,10 +11,8 @@ import Alamofire
 import SwiftyJSON
 import AlamofireSwiftyJSON
 
-@objc protocol PaginationDelegate: class {
-    @objc optional func paginationDidStart(activityIndicator: UIActivityIndicatorView)
-    @objc optional func paginationDidFinish(activityIndicator: UIActivityIndicatorView)
-    func paginationDidFinish(with json: JSON?, error: Error?, statusCode: Int?)
+protocol PaginationDelegate: class {
+    func paginationDidFinish(with activityIndicator: UIActivityIndicatorView, json: JSON?, error: Error?, statusCode: Int?)
 }
 
 class PaginationView: UIView {
@@ -24,12 +22,10 @@ class PaginationView: UIView {
             if isPaginating {
                 activityIndicator.startAnimating()
                 self.alpha = 1.0
-                self.delegate?.paginationDidStart?(activityIndicator: activityIndicator)
-                self.scrollView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+                self.scrollView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: self.bounds.height, right: 0)
             } else {
                 activityIndicator.stopAnimating()
                 self.alpha = 0.0
-                self.delegate?.paginationDidFinish?(activityIndicator: activityIndicator)
                 self.scrollView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             }
         }
@@ -90,7 +86,7 @@ extension PaginationView: UIScrollViewDelegate {
         let y = offset.y + bounds.size.height - inset.bottom
         let h = size.height
         
-        let reload_distance: CGFloat = 10 // It will call the API when there is 5 offers are remaining to be displayed. one offer height is 75.
+        let reload_distance: CGFloat = 70
         
         if (y > h + reload_distance) && !isPaginating {
             if data.url == "" || data.url == "\n" {
@@ -100,7 +96,7 @@ extension PaginationView: UIScrollViewDelegate {
             Alamofire.request(data.url, method: data.method, parameters: data.parameters, encoding: URLEncoding.default).responseSwiftyJSON { response in
                 delay(time: 5, closure: {
                     self.isPaginating = false
-                    self.delegate?.paginationDidFinish(with: response.result.value, error: response.error, statusCode: response.response?.statusCode)
+                    self.delegate?.paginationDidFinish(with: self.activityIndicator, json: response.result.value, error: response.error, statusCode: response.response?.statusCode)
                 })
             }
         }
