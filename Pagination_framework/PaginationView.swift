@@ -11,9 +11,9 @@ import Alamofire
 import SwiftyJSON
 import AlamofireSwiftyJSON
 
-protocol PaginationDelegate: class {
-    func paginationDidStart(activityIndicator: UIActivityIndicatorView)
-    func paginationDidFinish(activityIndicator: UIActivityIndicatorView)
+@objc protocol PaginationDelegate: class {
+    @objc optional func paginationDidStart(activityIndicator: UIActivityIndicatorView)
+    @objc optional func paginationDidFinish(activityIndicator: UIActivityIndicatorView)
     func paginationDidFinish(with json: JSON?, error: Error?, statusCode: Int?)
 }
 
@@ -24,12 +24,12 @@ class PaginationView: UIView {
             if isPaginating {
                 activityIndicator.startAnimating()
                 self.alpha = 1.0
-                self.delegate?.paginationDidStart(activityIndicator: activityIndicator)
+                self.delegate?.paginationDidStart?(activityIndicator: activityIndicator)
                 self.scrollView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
             } else {
                 activityIndicator.stopAnimating()
                 self.alpha = 0.0
-                self.delegate?.paginationDidFinish(activityIndicator: activityIndicator)
+                self.delegate?.paginationDidFinish?(activityIndicator: activityIndicator)
                 self.scrollView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             }
         }
