@@ -83,17 +83,22 @@ class PaginationView: UIView {
 extension PaginationView: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        print(targetContentOffset.pointee.y)
-        print(scrollView.contentOffset.y)
-        if !isPaginating && targetOffset < scrollView.contentOffset.y {
-            print(scrollView.contentOffset.y)
-            targetOffset = scrollView.contentOffset.y
+        let offset = scrollView.contentOffset
+        let bounds = scrollView.bounds
+        let size = scrollView.contentSize
+        let inset = scrollView.contentInset
+        let y = offset.y + bounds.size.height - inset.bottom
+        let h = size.height
+        
+        let reload_distance: CGFloat = 10 // It will call the API when there is 5 offers are remaining to be displayed. one offer height is 75.
+        
+        if (y > h + reload_distance) && !isPaginating {
             if data.url == "" || data.url == "\n" {
                 return
             }
             isPaginating = true
             Alamofire.request(data.url, method: data.method, parameters: data.parameters, encoding: URLEncoding.default).responseSwiftyJSON { response in
-                delay(time: 2, closure: {
+                delay(time: 5, closure: {
                     self.isPaginating = false
                     self.delegate?.paginationDidFinish(with: response.result.value, error: response.error, statusCode: response.response?.statusCode)
                 })
@@ -102,9 +107,7 @@ extension PaginationView: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if targetOffset < scrollView.contentOffset.y {
-            print(scrollView.contentOffset.y)
-        }
+        paginationBottomAnchor.constant = scrollView.contentSize.height - scrollView.contentOffset.y
     }
 }
 

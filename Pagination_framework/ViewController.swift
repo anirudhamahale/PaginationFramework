@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         tableView.superview?.addSubview(paginationView)
 
         paginationView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        let con = paginationView.bottomAnchor.constraint(equalTo: tableView.bottomAnchor)
+        let con = paginationView.topAnchor.constraint(equalTo: tableView.topAnchor)
         paginationView.paginationBottomAnchor = con
         con.isActive = true
         paginationView.leadingAnchor.constraint(equalTo: tableView.leadingAnchor).isActive = true
