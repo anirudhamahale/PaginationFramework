@@ -76,6 +76,7 @@ class PaginationView: UIView {
     }
 }
 
+
 extension PaginationView: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
