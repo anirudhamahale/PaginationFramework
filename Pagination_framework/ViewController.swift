@@ -46,6 +46,8 @@ class ViewController: UIViewController {
         paginationView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor).isActive = true
         paginationView.scrollView = tableView
         paginationView.scrollView?.delegate = paginationView
+        paginationView.shouldPaginate = true
+        paginationView.isPaginating = true
     }
 }
 
