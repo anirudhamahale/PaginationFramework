@@ -10,7 +10,7 @@ import UIKit
 
 class PaginationView: UIView {
     
-    public var isPaginating = false {
+    var isPaginating = false {
         didSet {
             if isPaginating {
                 activityIndicator.startAnimating()
@@ -24,11 +24,12 @@ class PaginationView: UIView {
         }
     }
     
-    public var paginationBottomAnchor: NSLayoutConstraint!
-    public var scrollView: UIScrollView?
+    var paginationBottomAnchor: NSLayoutConstraint!
+    var scrollView: UIScrollView?
     var targetOffset: CGFloat = 0.0
+    var shouldPaginate = true
     
-    public var activityIndicator: UIActivityIndicatorView = {
+    var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
         view.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         view.hidesWhenStopped = true
@@ -66,7 +67,7 @@ extension PaginationView: UIScrollViewDelegate {
         
         let reload_distance: CGFloat = 70
         
-        if (y > h + reload_distance) && !isPaginating {
+        if (y > h + reload_distance) && !isPaginating && shouldPaginate {
             isPaginating = true
             
             delay(time: 5, closure: { 
