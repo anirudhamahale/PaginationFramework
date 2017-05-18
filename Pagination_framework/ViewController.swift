@@ -21,7 +21,9 @@ class ViewController: UIViewController {
         }
     }
     
+    // 1 create instance of PaginationView
     let paginationView = PaginationView()
+    
     @IBOutlet weak var tableView: UITableView!
     
     var movieData = [Movie]()
@@ -33,10 +35,9 @@ class ViewController: UIViewController {
         setUpPagination() 
     }
     
+    // 2 Call this method to setup the pagination.
     func setUpPagination() {
-        paginationView.data.url = "http://www.omdbapi.com/?s=th&page=1"
         tableView.superview?.addSubview(paginationView)
-
         paginationView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         let con = paginationView.topAnchor.constraint(equalTo: tableView.topAnchor)
         paginationView.paginationBottomAnchor = con
@@ -45,7 +46,6 @@ class ViewController: UIViewController {
         paginationView.trailingAnchor.constraint(equalTo: tableView.trailingAnchor).isActive = true
         paginationView.scrollView = tableView
         paginationView.scrollView?.delegate = paginationView
-        paginationView.delegate = self
     }
 }
 
@@ -63,30 +63,5 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = movieData[indexPath.row].name
         cell.detailTextLabel?.text = movieData[indexPath.row].year
         return cell
-    }
-}
-
-extension ViewController: PaginationDelegate {
-    func paginationDidFinish(with activityIndicator: UIActivityIndicatorView, json: JSON?, error: Error?, statusCode: Int?) {
-        if error != nil {
-            return
-        }
-        
-        if statusCode == 200 {
-            guard let readableJson = json else {
-                return
-            }
-            
-            guard let search = readableJson["Search"].array else {
-                return
-            }
-            
-            for item in search {
-                let name = item["Title"].string ?? ""
-                let year = item["Year"].string ?? ""
-                movieData.append(Movie(name: name, year: year))
-            }
-            tableView.reloadData()
-        }
     }
 }
